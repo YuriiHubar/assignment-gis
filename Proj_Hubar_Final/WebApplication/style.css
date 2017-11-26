@@ -1,0 +1,67 @@
+﻿body {
+    margin: 0;
+    padding: 0;
+    background: #FF7F50;
+}
+
+#map {
+    position: absolute;
+    top: 2px;
+    width: 85%;
+    height: 100%;
+    left: 2px;
+}
+
+#menu {
+  position: relative;
+    float: right;
+    width: 15%;
+    background: #9090B0;
+    height: 100%;
+    top: 2px;
+    left: 2px;
+}
+
+#TB_Distance {
+  border: 1px solid; 
+  width: 90%;
+}
+#TB_Count {
+  border: 1px solid;
+  width: 90%;
+}
+#TB_Level {
+  border: 1px solid;
+  width: 90%;
+}
+#TB_Sensivity {
+  border: 1px solid;
+  width: 90%;
+}
+#TB_Weight1 {
+  border: 1px solid;
+  width: 90%;
+}
+#TB_Weight2 {
+  border: 1px solid;
+  width: 90%;
+}
+#TB_Weight3 {
+  border: 1px solid;
+  width: 90%;
+}
+#TB_Weight4 {
+  border: 1px solid;
+  width: 90%;
+}
+#TB_Weight5 {
+  border: 1px solid;
+  width: 90%;
+}
+button {
+  width: 90%;  
+}
+
+p{
+  padding-left: 10%
+}
