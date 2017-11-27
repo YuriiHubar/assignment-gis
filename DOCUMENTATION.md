@@ -6,10 +6,10 @@ V úlohe sme použili dáta dostupné na Open Street Maps (adresa https://www.op
 V práci využívame dump s dátumu 29.10.2017, ohraničený Bratislavou.
 
 Súradnice ohraničenia mapy:
-       SRID 4326           SRID 900913
-min_x  16.9775515188954	   1889932.39
-max_x  17.2376983251162	   1918891.80
-min_y  48.0992451999721	   6123381.61
+-----  SRID 4326           SRID 900913
+min_x  16.9775515188954    1889932.39
+max_x  17.2376983251162    1918891.80
+min_y  48.0992451999721    6123381.61
 max_y  48.2250000000000    6144368.78
 
 Tento dump sme nahrali do databázy pomocou programu osm2pgsql.
