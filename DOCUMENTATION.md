@@ -1,44 +1,44 @@
-# Úvod
-Táto aplikácia vyh¾adáva pod¾a umiestnenej znaèky, citlivosti, typu analyzovanıch bodov a váh miesta, ktoré majú najlepšie hodnotenie. Hodnotenie sa poèíta na základe vzdialeností najbliších objektov zadaného typu a váh pre tieto typy. Nájdene miesta budú oznaèené znaèkami.
+# Ãšvod
+TÃ¡to aplikÃ¡cia vyhÄ¾adÃ¡va podÄ¾a umiestnenej znaÄky, citlivosti, typu analyzovanÃ½ch bodov a vÃ¡h miesta, ktorÃ© majÃº najlepÅ¡ie hodnotenie. Hodnotenie sa poÄÃ­ta na zÃ¡klade vzdialenostÃ­ najbliÅ¾Å¡Ã­ch objektov zadanÃ©ho typu a vÃ¡h pre tieto typy. NÃ¡jdene miesta budÃº oznaÄenÃ© znaÄkami.
 
-# Dáta
-V úlohe sme pouili dáta dostupné na Open Street Maps (adresa https://www.openstreetmap.org/).
-V práci vyuívame dump s dátumu 29.10.2017, ohranièenı Bratislavou.
+# DÃ¡ta
+V Ãºlohe sme pouÅ¾ili dÃ¡ta dostupnÃ© na Open Street Maps (adresa https://www.openstreetmap.org/).
+V prÃ¡ci vyuÅ¾Ã­vame dump s dÃ¡tumu 29.10.2017, ohraniÄenÃ½ Bratislavou.
 
-Súradnice ohranièenia mapy:
-		SRID 4326			SRID 900913
-min_x		16.9775515188954	1889932.39
-max_x	17.2376983251162	1918891.80
-min_y		48.0992451999721	6123381.61
-max_y	48.2250000000000	6144368.78
+SÃºradnice ohraniÄenia mapy:
+       SRID 4326           SRID 900913
+min_x  16.9775515188954	   1889932.39
+max_x  17.2376983251162	   1918891.80
+min_y  48.0992451999721	   6123381.61
+max_y  48.2250000000000    6144368.78
 
-Tento dump sme nahrali do databázy pomocou programu osm2pgsql.
-Kvôli vıpoètovej nároènosti vypoèítavania hodnotenia na základe 5 typov objektov, vzdialenos do najblišieho objektu kadého typu sa nevypoèítavá operatívne, ale vypoèítava sa jeden raz pri príprave DB. Na to sa pouívajú doplòujúce ståpce do ktorıch sa vısledky aj zapisujú.
-Okrem faktickıch bodov s mapy tam sa pridávajú aj generované cez kadıch 50, 100 a 200 metrov body.
-Pod¾a intervalu generovania body majú identifikátor level: real = 0, 50m = 1, 100m = 2, 200m = 3. 
-Skripty na prípravu databázy sú v súbori prepare.sql.
+Tento dump sme nahrali do databÃ¡zy pomocou programu osm2pgsql.
+KvÃ´li vÃ½poÄtovej nÃ¡roÄnosti vypoÄÃ­tavania hodnotenia na zÃ¡klade 5 typov objektov, vzdialenosÅ¥ do najbliÅ¾Å¡ieho objektu kaÅ¾dÃ©ho typu sa nevypoÄÃ­tavÃ¡ operatÃ­vne, ale vypoÄÃ­tava sa jeden raz pri prÃ­prave DB. Na to sa pouÅ¾Ã­vajÃº doplÅˆujÃºce stÄºpce do ktorÃ½ch sa vÃ½sledky aj zapisujÃº.
+Okrem faktickÃ½ch bodov s mapy tam sa pridÃ¡vajÃº aj generovanÃ© cez kaÅ¾dÃ½ch 50, 100 a 200 metrov body.
+PodÄ¾a intervalu generovania body majÃº identifikÃ¡tor level: real = 0, 50m = 1, 100m = 2, 200m = 3. 
+Skripty na prÃ­pravu databÃ¡zy sÃº v sÃºbori prepare.sql.
 
 
-# Funkcie aplikácie
-- vyh¾adávanie miest s najlepším hodnotením
-- vyh¾adávanie na základe zadanej maximálnej vzdialenosti v rozsahu 	0...10 km
-- vyh¾adávanie na základe koeficientu citlivosti 					1...3000
-- vyh¾adávanie na základe váh pre kadı typ objektu 				-10...10
-- urèenie mnostva nájdenıch bodov v rozsahu 				0 - 350
-- zmena ukazovate¾a aktuálnej pozície
-- pre kadı nájdenı objekt vyskakuje popup okno s informáciou o súradniciach a hodnotení
-- pre ukazovate¾ sa zobrazuje popup okno s aktuálnymi súradnicami
+# Funkcie aplikÃ¡cie
+- vyhÄ¾adÃ¡vanie miest s najlepÅ¡Ã­m hodnotenÃ­m
+- vyhÄ¾adÃ¡vanie na zÃ¡klade zadanej maximÃ¡lnej vzdialenosti v rozsahu 0...10 km
+- vyhÄ¾adÃ¡vanie na zÃ¡klade koeficientu citlivosti                    1...3000
+- vyhÄ¾adÃ¡vanie na zÃ¡klade vÃ¡h pre kaÅ¾dÃ½ typ objektu                 -10...10
+- urÄenie mnoÅ¾stva nÃ¡jdenÃ½ch bodov v rozsahu                        0 - 350
+- zmena ukazovateÄ¾a aktuÃ¡lnej pozÃ­cie
+- pre kaÅ¾dÃ½ nÃ¡jdenÃ½ objekt vyskakuje popup okno s informÃ¡ciou o sÃºradniciach a hodnotenÃ­
+- pre ukazovateÄ¾ sa zobrazuje popup okno s aktuÃ¡lnymi sÃºradnicami
 
-# Fungovanie aplikácie
-Aplikácia sa skladá s Backendu, ktorı je naprogramovanı v C# a webového Frontendu naprogramovaného v HTML a Javascript.
-Backend poskytuje Web Service funkciu FindPoints(), ktorej návratová hodnota je geojson s dopytovanım vısledkom.
-Frontend slúi na zadávanie dopytu a zobrazovanie vısledku. Na kreslenie pozadia mapy sa pouíva MapBox.
+# Fungovanie aplikÃ¡cie
+AplikÃ¡cia sa skladÃ¡ s Backendu, ktorÃ½ je naprogramovanÃ½ v C# a webovÃ©ho Frontendu naprogramovanÃ©ho v HTML a Javascript.
+Backend poskytuje Web Service funkciu FindPoints(), ktorej nÃ¡vratovÃ¡ hodnota je geojson s dopytovanÃ½m vÃ½sledkom.
+Frontend slÃºÅ¾i na zadÃ¡vanie dopytu a zobrazovanie vÃ½sledku. Na kreslenie pozadia mapy sa pouÅ¾Ã­va MapBox.
 
-**Ukáka dopytu na nájdenie 350 bodov s najvyšším hodnotením v okolí 2000m pod¾a faktickıch bodov a váh 5,5,5,5,-5**
+**UkÃ¡Å¾ka dopytu na nÃ¡jdenie 350 bodov s najvyÅ¡Å¡Ã­m hodnotenÃ­m v okolÃ­ 2000m podÄ¾a faktickÃ½ch bodov a vÃ¡h 5,5,5,5,-5**
 
 'POST WebForm1.aspx/FindPoints?latC=17.07171320915222&longC=48.153840297249474&distance=2000&count=350&level=0&sens=0&w1=5&w2=5&w3=5&w4=5&lw5=-5' 
 
-# Ukáka aplikácie
+# UkÃ¡Å¾ka aplikÃ¡cie
 ![Screenshot](screen-1.png)
 ![Screenshot](screen-2.png)
 ![Screenshot](screen-3.png)
